@@ -597,3 +597,61 @@ Ok, one module loaded.
 2022-06-30 15:52:56.411581417
 >>> :q
 Leaving GHCi.
+GHCi, version 9.0.2: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/fuka/bprog2022/.ghci
+2022-07-07 16:05:03.202906659
+>>> :e src/Caesar .hs
+catn: src/Caesar: openFile: does not exist (No such file or directory)
+2022-07-07 16:05:38.140570835
+>>> :l src/Caesar .hs
+
+<no location info>: error: can't find file: .hs
+Failed, no modules loaded.
+2022-07-07 16:05:38.208593008
+>>> ord 'A '
+
+<interactive>:3:9: error:
+    lexical error in string/character literal at end of input
+2022-07-07 16:05:54.67158995
+>>> ord 'A'
+
+<interactive>:4:1: error:
+    • Variable not in scope: ord :: Char -> t
+    • Perhaps you meant one of these:
+        ‘or’ (imported from Prelude), ‘odd’ (imported from Prelude)
+2022-07-07 16:06:13.595830657
+>>> :e src/Caesar.hs
+   1  module Caesar where
+   2  
+   3  import Data.Char
+
+<no location info>: error: can't find file: .hs
+Failed, no modules loaded.
+2022-07-07 16:07:21.931129188
+>>> :l src/Caesar.hs
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-07 16:07:22.018350192
+>>> :e src/Caesar where
+catn: src/Caesar: openFile: does not exist (No such file or directory)
+2022-07-07 16:07:56.647356743
+>>> :l src/Caesar where
+target ‘where’ is not a module name or a source file
+2022-07-07 16:07:56.744385463
+>>> :e src/Caesar.hs
+   1  module Caesar where
+   2  
+   3  import Data.Char
+Ok, one module loaded.
+2022-07-07 16:09:42.045185043
+>>> :l src/Caesar.hs
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-07 16:09:42.141835095
+>>> import Data.Char
+2022-07-07 16:10:09.916987566
+>>> ord 'a'
+97
+2022-07-07 16:10:43.822388716
+>>> :q
+Leaving GHCi.
