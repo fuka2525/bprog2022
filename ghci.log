@@ -655,3 +655,619 @@ Ok, one module loaded.
 2022-07-07 16:10:43.822388716
 >>> :q
 Leaving GHCi.
+GHCi, version 9.0.2: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/fuka/bprog2022/.ghci
+2022-07-14 15:11:27.561707755
+>>> :e src/Caesar .hs
+catn: src/Caesar: openFile: does not exist (No such file or directory)
+2022-07-14 15:12:29.709812482
+>>> :l src/Caesar .hs
+
+<no location info>: error: can't find file: .hs
+Failed, no modules loaded.
+2022-07-14 15:12:29.784457719
+>>> :e src/Caesar.hs
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c
+
+<no location info>: error: can't find file: .hs
+Failed, no modules loaded.
+2022-07-14 15:13:00.507927303
+>>> :l src/Caesar.hs
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-14 15:13:00.603629594
+>>> let2int 'a'
+97
+2022-07-14 15:13:39.732304028
+>>> let2int 'z'
+122
+2022-07-14 15:13:51.492684476
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-14 15:15:17.444173584
+>>> let2int 'a'
+0
+2022-07-14 15:15:36.20744161
+>>> let2int 'z'
+25
+2022-07-14 15:15:53.251491821
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let i = chr i(i + ord 'a')
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:9:13: error:
+    • Couldn't match expected type ‘Int -> Char’
+                  with actual type ‘Char’
+    • The function ‘chr’ is applied to two value arguments,
+        but its type ‘Int -> Char’ has only one
+      In the expression: chr i (i + ord 'a')
+      In an equation for ‘int2let’: int2let i = chr i (i + ord 'a')
+  |
+9 | int2let i = chr i(i + ord 'a')
+  |             ^^^^^^^^^^^^^^^^^^
+Failed, no modules loaded.
+2022-07-14 15:20:17.343902559
+>>> int2let 25
+
+<interactive>:11:1: error:
+    Variable not in scope: int2let :: t0 -> t
+2022-07-14 15:20:31.206056217
+>>> int2let 25
+
+<interactive>:12:1: error:
+    Variable not in scope: int2let :: t0 -> t
+2022-07-14 15:20:49.379424997
+>>> int2let 25
+
+<interactive>:13:1: error:
+    Variable not in scope: int2let :: t0 -> t
+2022-07-14 15:21:49.224305814
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-14 15:21:53.138720708
+>>> int2let 25
+'z'
+2022-07-14 15:22:04.571923117
+>>> shift (-3) 'd'
+
+<interactive>:16:1: error:
+    Variable not in scope: shift :: t0 -> Char -> t
+2022-07-14 15:28:25.82648516
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'mod' 26)
+  14      | otherwise = c
+  15      
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 15:28:30.56505598
+>>> shift (-3) 'd'
+
+<interactive>:18:1: error:
+    Variable not in scope: shift :: t0 -> Char -> t
+2022-07-14 15:29:02.758751902
+>>> shift 3 'z'
+
+<interactive>:19:1: error:
+    Variable not in scope: shift :: t0 -> Char -> t
+2022-07-14 15:29:38.397543769
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'mod' 26)
+  14      | otherwise = c
+  15      
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 15:31:55.767782497
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'mod' 26)
+  14      | otherwise = c
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 15:32:33.195454636
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'mod' 26)
+  14      | otherwise = c
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 15:33:25.303393317
+>>> encode 3 "haskell is fun"
+
+<interactive>:23:1: error:
+    Variable not in scope: encode :: t0 -> t1 -> t
+2022-07-14 15:37:11.518060955
+>>> it
+
+<interactive>:24:1: error:
+    • Variable not in scope: it
+    • Perhaps you meant ‘id’ (imported from Prelude)
+2022-07-14 15:48:28.0818312
+>>> encode (-3) it
+
+<interactive>:25:1: error:
+    Variable not in scope: encode :: t0 -> t1 -> t
+
+<interactive>:25:13: error:
+    • Variable not in scope: it
+    • Perhaps you meant ‘id’ (imported from Prelude)
+2022-07-14 15:49:25.186106725
+>>> let2int 'a'
+
+<interactive>:26:1: error:
+    Variable not in scope: let2int :: Char -> t
+2022-07-14 15:52:02.857193234
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'mod' 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 15:53:26.965232113
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'mod' 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24          
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 15:59:19.625949584
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'mod' 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24          
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 16:00:02.072178338
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'mod' 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24          
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 16:00:04.904377074
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n)'mod' 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24          
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:43: error:
+    • Syntax error on 'mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n)'mod' 26)
+   |                                           ^^^^^
+Failed, no modules loaded.
+2022-07-14 16:00:28.597504811
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'Mod' 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24          
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'Mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'Mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'Mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 16:00:52.618522596
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) 'Mod' 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24          
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+
+src/Caesar.hs:13:44: error:
+    • Syntax error on 'Mod'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'Mod'
+   |
+13 |     | isLower c = int2let ((let2int c + n) 'Mod' 26)
+   |                                            ^^^^^
+Failed, no modules loaded.
+2022-07-14 16:00:57.329365371
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) `mod` 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24          
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-14 16:04:36.005001429
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) `mod` 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24          
+Ok, one module loaded.
+2022-07-14 16:04:41.931249214
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) `mod` 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24  percent :: Int -> Int -> Float
+  25  percent n m = (fromIntegral n  / fromIntegral m) * 100
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-14 16:08:55.024908248
+>>> percent 5 15
+33.333336
+2022-07-14 16:09:18.791242522
+>>> :e
+   1  module Caesar where
+   2  
+   3  import Data.Char
+   4  
+   5  let2int :: Char -> Int
+   6  let2int c = ord c - ord 'a'
+   7  
+   8  int2let :: Int -> Char
+   9  int2let n = chr (ord 'a' + n)
+  10  
+  11  shift :: Int -> (Char -> Char)
+  12  shift n c
+  13      | isLower c = int2let ((let2int c + n) `mod` 26)
+  14      | otherwise = c
+  15  
+  16  encode :: Int ->    (String -> String)    
+  17  encode n xs = [ shift n x | x <- xs]
+  18  
+  19  table :: [Float]
+  20  table = [8.1, 1.5, 2.8, 4.2, 12.7, 2.2, 2.0, 6.1, 7.0
+  21          , 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0
+  22          , 6.3, 9.0, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1
+  23          ]
+  24  percent :: Int -> Int -> Float
+  25  percent n m = (fromIntegral n  / fromIntegral m) * 100
+  26  
+  27  
+  28  count :: Char -> (String -> Int)
+  29  count x xs = length [ x' | x' <- xs, x == x']
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-14 16:15:28.098015078
+>>> :q
+Leaving GHCi.
